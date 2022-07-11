@@ -20,4 +20,9 @@ public class PostController {
     public void postBoard(@Valid @RequestBody PostRequest postRequest) {
         postService.postBoard(postRequest);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void postDelete(@PathVariable("id") Long id) {
+        postService.postDelete(id);
+    }
 }
