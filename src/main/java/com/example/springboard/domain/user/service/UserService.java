@@ -5,6 +5,7 @@ import com.example.springboard.domain.user.domain.dto.request.UserRequest;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
 import com.example.springboard.global.exception.AlreadyExistAccountException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void userSignUp(UserRequest userRequest) {
         if (userRepository.findByAccountId(userRequest.getAccountId()).isPresent()) {
@@ -20,7 +22,7 @@ public class UserService {
 
         User user = User.builder()
                 .accountId(userRequest.getAccountId())
-                .password(userRequest.getPassword())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .name(userRequest.getName())
                 .build();
         userRepository.save(user);
