@@ -20,4 +20,9 @@ public class UserController {
     public void userSignUp(@Valid @RequestBody UserRequest userRequest) {
         userService.userSignUp(userRequest);
     }
+    
+    @DeleteMapping("/delete/{id}")
+    public void userDelete(@PathVariable ("id") Long id) {
+        userService.userDelete(id);
+    }
 }

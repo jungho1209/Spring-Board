@@ -4,9 +4,11 @@ import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.dto.request.UserRequest;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
 import com.example.springboard.global.exception.AlreadyExistAccountException;
+import com.example.springboard.global.exception.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -27,4 +29,15 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
+
+    @Transactional
+    public void userDelete(Long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> IdNotFoundException.EXCEPTION);
+
+        userRepository.delete(user);
+    }
+
+
 }
