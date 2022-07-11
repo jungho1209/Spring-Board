@@ -25,6 +25,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
