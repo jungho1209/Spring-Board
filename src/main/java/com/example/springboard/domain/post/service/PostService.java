@@ -3,6 +3,7 @@ package com.example.springboard.domain.post.service;
 import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.dto.request.PostRequest;
 import com.example.springboard.domain.post.domain.dto.request.PostUpdateRequest;
+import com.example.springboard.domain.post.domain.dto.response.PostListResponse;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
@@ -11,6 +12,9 @@ import com.example.springboard.global.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -51,6 +55,21 @@ public class PostService {
                 postUpdateRequest.getContent());
     }
 
+    @Transactional(readOnly = true)
+    public PostListResponse searchAllPostAtUsers(Long userId) {
+
+        User user = getUser(userId);
+
+        List<PostListResponse.PostResponse> postList = postRepository.findAllByUserId(user.getId())
+                .stream()
+                .map(post -> PostListResponse.PostResponse.builder()
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .build())
+                .collect(Collectors.toList());
+
+        return new PostListResponse(postList);
+    }
 
     private User getUser(Long userId) {
         return userRepository.findById(userId)

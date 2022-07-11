@@ -2,6 +2,7 @@ package com.example.springboard.domain.post.controller;
 
 import com.example.springboard.domain.post.domain.dto.request.PostRequest;
 import com.example.springboard.domain.post.domain.dto.request.PostUpdateRequest;
+import com.example.springboard.domain.post.domain.dto.response.PostListResponse;
 import com.example.springboard.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,10 @@ public class PostController {
     @PutMapping("/update/{id}")
     public void postUpdate(@PathVariable ("id") Long id , @Valid @RequestBody PostUpdateRequest postUpdateRequest) {
         postService.postUpdate(id, postUpdateRequest);
+    }
+
+    @GetMapping("/searchAll/{user-id}")
+    public PostListResponse searchAllPostAtUsers(@PathVariable ("user-id") Long userId) {
+        return postService.searchAllPostAtUsers(userId);
     }
 }
