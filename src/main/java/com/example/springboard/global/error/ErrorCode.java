@@ -18,6 +18,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(404, "User Not Found"),
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken Not Found"),
     AUTH_NOT_FOUND(404, "Auth Not Found"),
+    POST_NOT_FOUND(404, "Post Not Found"),
+    COMMENT_NOT_FOUND(404, "Comment Not Found"),
 
     USER_EXISTS(409, "User Exists"),
 
