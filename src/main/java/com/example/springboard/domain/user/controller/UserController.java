@@ -1,5 +1,6 @@
 package com.example.springboard.domain.user.controller;
 
+import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
 import com.example.springboard.domain.user.domain.dto.request.UserRequest;
 import com.example.springboard.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,15 @@ public class UserController {
     public void userSignUp(@Valid @RequestBody UserRequest userRequest) {
         userService.userSignUp(userRequest);
     }
-    
-    @DeleteMapping("/delete/{id}")
-    public void userDelete(@PathVariable ("id") Long id) {
-        userService.userDelete(id);
+
+    @DeleteMapping("/delete/{account-id}")
+    public void userDelete(@PathVariable("account-id") String accountId) {
+        userService.userDelete(accountId);
+    }
+
+    @PutMapping("/{account-id}")
+    public void userUpdate(@PathVariable("account-id") String accountId,
+                           @Valid @RequestBody UserPutRequest userPutRequest) {
+        userService.userUpdate(accountId, userPutRequest);
     }
 }

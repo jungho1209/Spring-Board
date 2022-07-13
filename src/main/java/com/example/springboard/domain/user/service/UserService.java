@@ -1,10 +1,12 @@
 package com.example.springboard.domain.user.service;
 
 import com.example.springboard.domain.user.domain.User;
+import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
 import com.example.springboard.domain.user.domain.dto.request.UserRequest;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
 import com.example.springboard.global.exception.AlreadyExistAccountException;
 import com.example.springboard.global.exception.IdNotFoundException;
+import com.example.springboard.global.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,12 +33,22 @@ public class UserService {
     }
 
     @Transactional
-    public void userDelete(Long id) {
+    public void userDelete(String accountId) {
 
-        User user = userRepository.findById(id)
+        User user = userRepository.findByAccountId(accountId)
                 .orElseThrow(() -> IdNotFoundException.EXCEPTION);
 
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public void userUpdate(String accountId, UserPutRequest userPutRequest) {
+
+        User user = userRepository.findByAccountId(accountId)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        user.userUpdate(passwordEncoder.encode(userPutRequest.getPassword()),
+                userPutRequest.getName());
     }
 
 

@@ -16,18 +16,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20 , nullable = false)
+    @Column(length = 20, nullable = false)
     private String accountId;
 
-    @Column(length = 60 , nullable = false)
+    @Column(length = 60, nullable = false)
     private String password;
 
-    @Column(length = 8 , nullable = false)
+    @Column(length = 8, nullable = false)
     private String name;
 
     @Builder
     public User(String accountId, String password, String name) {
         this.accountId = accountId;
+        this.password = password;
+        this.name = name;
+    }
+
+    public void userUpdate(String password, String name) {
         this.password = password;
         this.name = name;
     }
