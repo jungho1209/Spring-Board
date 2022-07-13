@@ -6,6 +6,8 @@ import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
+import com.example.springboard.global.exception.CommentNotFoundException;
+import com.example.springboard.global.exception.NoPermissionToDeleteCommentException;
 import com.example.springboard.global.exception.PostNotFoundException;
 import com.example.springboard.global.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,19 @@ public class CommentService {
                 .build());
     }
 
+    @Transactional
+    public void deleteComment(Long commentId, Long userId) {
+
+        User user = getUser(userId);
+        Comment comment = getComment(commentId);
+
+        if (!comment.getUser().equals(user)) {
+            throw NoPermissionToDeleteCommentException.EXCEPTION;
+        }
+
+        commentRepository.delete(comment);
+    }
+
     private Post getPost(Long postId) {
         return postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
@@ -43,4 +58,8 @@ public class CommentService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
+    private Comment getComment(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> CommentNotFoundException.EXCEPTION);
+    }
 }

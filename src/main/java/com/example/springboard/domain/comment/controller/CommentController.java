@@ -21,4 +21,9 @@ public class CommentController {
                               @RequestBody @Valid CreateCommentRequest request) {
         commentService.createComment(userId, postId, request.getComment());
     }
+
+    @DeleteMapping("/{comment-id}/{user-id}")
+    public void deleteComment(@PathVariable("comment-id") Long commentId, @PathVariable ("user-id") Long userId) {
+        commentService.deleteComment(commentId, userId);
+    }
 }
