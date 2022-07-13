@@ -37,6 +37,5 @@ public class Post {
     public void postUpdate(String title, String content) {
         this.title = title;
         this.content = content;
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.springboard.global.exception;
+package com.example.springboard.domain.post.exception;
 
 import com.example.springboard.global.error.CustomException;
 import com.example.springboard.global.error.ErrorCode;

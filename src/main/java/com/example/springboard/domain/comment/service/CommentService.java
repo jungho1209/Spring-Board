@@ -2,13 +2,16 @@ package com.example.springboard.domain.comment.service;
 
 import com.example.springboard.domain.comment.domain.Comment;
 import com.example.springboard.domain.comment.domain.dto.response.CommentListResponse;
-import com.example.springboard.domain.comment.domain.dto.response.CommentResponse;
 import com.example.springboard.domain.comment.domain.repository.CommentRepository;
+import com.example.springboard.domain.comment.exception.CommentNotFoundException;
+import com.example.springboard.domain.comment.exception.NoPermissionToDeleteCommentException;
+import com.example.springboard.domain.comment.exception.NoPermissionToModifyCommentException;
 import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
+import com.example.springboard.domain.post.exception.PostNotFoundException;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
-import com.example.springboard.global.exception.*;
+import com.example.springboard.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
