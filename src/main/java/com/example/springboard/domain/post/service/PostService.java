@@ -7,7 +7,7 @@ import com.example.springboard.domain.post.domain.dto.response.PostListResponse;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
-import com.example.springboard.global.exception.IdNotFoundException;
+import com.example.springboard.global.exception.PostNotFoundException;
 import com.example.springboard.global.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class PostService {
     public void postDelete(Long id) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> IdNotFoundException.EXCEPTION);
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         postRepository.delete(post);
     }
@@ -49,7 +49,7 @@ public class PostService {
     public void postUpdate(Long id, PostUpdateRequest postUpdateRequest) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> IdNotFoundException.EXCEPTION);
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         post.postUpdate(postUpdateRequest.getTitle(),
                 postUpdateRequest.getContent());

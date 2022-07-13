@@ -5,7 +5,6 @@ import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
 import com.example.springboard.domain.user.domain.dto.request.UserRequest;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
 import com.example.springboard.global.exception.AlreadyExistAccountException;
-import com.example.springboard.global.exception.IdNotFoundException;
 import com.example.springboard.global.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,7 +35,7 @@ public class UserService {
     public void userDelete(String accountId) {
 
         User user = userRepository.findByAccountId(accountId)
-                .orElseThrow(() -> IdNotFoundException.EXCEPTION);
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
         userRepository.delete(user);
     }
