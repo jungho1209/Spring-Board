@@ -1,18 +1,20 @@
 package com.example.springboard.domain.comment.service;
 
 import com.example.springboard.domain.comment.domain.Comment;
+import com.example.springboard.domain.comment.domain.dto.response.CommentListResponse;
+import com.example.springboard.domain.comment.domain.dto.response.CommentResponse;
 import com.example.springboard.domain.comment.domain.repository.CommentRepository;
 import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
-import com.example.springboard.global.exception.CommentNotFoundException;
-import com.example.springboard.global.exception.NoPermissionToDeleteCommentException;
-import com.example.springboard.global.exception.PostNotFoundException;
-import com.example.springboard.global.exception.UserNotFoundException;
+import com.example.springboard.global.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +49,36 @@ public class CommentService {
 
         commentRepository.delete(comment);
     }
+
+    @Transactional
+    public void updateComment(Long commentId, Long userId, String comment) {
+
+        User user = getUser(userId);
+        Comment dbComment = getComment(commentId);
+
+        if (!dbComment.getUser().equals(user)) {
+            throw NoPermissionToModifyCommentException.EXCEPTION;
+        }
+
+        dbComment.updateComment(comment);
+    }
+
+    @Transactional(readOnly = true)
+    public CommentListResponse getCommentList(Long postId) {
+
+        Post post = getPost(postId);
+
+        List<CommentListResponse.CommentResponse> commentList = commentRepository.findAllByPostId(post.getId())
+                .stream()
+                .map(comment -> CommentListResponse.CommentResponse.builder()
+                        .commentId(comment.getId())
+                        .comment(comment.getComment())
+                        .build())
+                .collect(Collectors.toList());
+
+        return new CommentListResponse(commentList);
+    }
+
 
     private Post getPost(Long postId) {
         return postRepository.findById(postId)
