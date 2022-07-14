@@ -76,6 +76,8 @@ public class CommentService {
                 .map(comment -> CommentListResponse.CommentResponse.builder()
                         .commentId(comment.getId())
                         .comment(comment.getComment())
+                        .createdAt(comment.getCreatedAt())
+                        .updatedAt(comment.getUpdateAt())
                         .build())
                 .collect(Collectors.toList());
 
