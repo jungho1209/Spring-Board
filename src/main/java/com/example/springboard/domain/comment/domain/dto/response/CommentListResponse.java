@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,6 +18,8 @@ public class CommentListResponse {
     public static class CommentResponse {
         private final Long commentId;
         private final String comment;
+        private final LocalDateTime createdAt;
+        private final LocalDateTime updatedAt;
     }
 
 
