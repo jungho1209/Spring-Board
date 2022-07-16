@@ -21,7 +21,7 @@ public class CommentController {
     @PostMapping("/{post-id}/{user-id}")
     public void createComment(@PathVariable("post-id") Long postId, @PathVariable("user-id") Long userId,
                               @RequestBody @Valid CreateCommentRequest request) {
-        commentService.createComment(userId, postId, request.getComment());
+        commentService.createComment(postId, userId, request.getComment());
     }
 
     @DeleteMapping("/{comment-id}/{user-id}")
