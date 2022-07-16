@@ -1,5 +1,8 @@
 package com.example.springboard.global.config;
 
+import com.example.springboard.global.error.ExceptionFilter;
+import com.example.springboard.global.jwt.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,9 +12,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final JwtTokenProvider jwtTokenProvider;
+    private final ExceptionFilter exceptionFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -27,14 +34,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
 
-                .anyRequest().authenticated();
+                .antMatchers("/user/signup").permitAll()
+                .antMatchers("/user/signin").permitAll()
+
+                .anyRequest().authenticated()
+
+                .and()
+                .apply(new FilterConfig(jwtTokenProvider, exceptionFilter));
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
+
