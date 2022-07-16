@@ -1,7 +1,9 @@
 package com.example.springboard.domain.user.controller;
 
+import com.example.springboard.domain.user.domain.dto.request.UserLoginRequest;
 import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
 import com.example.springboard.domain.user.domain.dto.request.UserRequest;
+import com.example.springboard.domain.user.domain.dto.response.TokenResponse;
 import com.example.springboard.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,5 +33,10 @@ public class UserController {
     public void userUpdate(@PathVariable("account-id") String accountId,
                            @Valid @RequestBody UserPutRequest userPutRequest) {
         userService.userUpdate(accountId, userPutRequest);
+    }
+
+    @PostMapping("/signin")
+    public TokenResponse userSignIn(@Valid @RequestBody UserLoginRequest userLoginRequest) {
+        return userService.userSignIn(userLoginRequest);
     }
 }
