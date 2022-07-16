@@ -1,7 +1,7 @@
 package com.example.springboard.global.jwt;
 
 import com.example.springboard.domain.user.domain.RefreshToken;
-import com.example.springboard.domain.user.domain.dto.response.TokenResponse;
+import com.example.springboard.domain.user.controller.dto.response.TokenResponse;
 import com.example.springboard.domain.user.domain.repository.RefreshTokenRepository;
 import com.example.springboard.global.auth.AuthDetailsService;
 import com.example.springboard.global.exception.ExpiredJwtException;

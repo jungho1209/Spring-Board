@@ -1,9 +1,9 @@
 package com.example.springboard.domain.post.service;
 
 import com.example.springboard.domain.post.domain.Post;
-import com.example.springboard.domain.post.domain.dto.request.PostRequest;
-import com.example.springboard.domain.post.domain.dto.request.PostUpdateRequest;
-import com.example.springboard.domain.post.domain.dto.response.PostListResponse;
+import com.example.springboard.domain.post.controller.dto.request.PostRequest;
+import com.example.springboard.domain.post.controller.dto.request.PostUpdateRequest;
+import com.example.springboard.domain.post.controller.dto.response.PostListResponse;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.user.domain.User;
 import com.example.springboard.domain.user.domain.repository.UserRepository;

@@ -1,15 +1,14 @@
 package com.example.springboard.domain.user.service;
 
 import com.example.springboard.domain.user.domain.User;
-import com.example.springboard.domain.user.domain.dto.request.UserLoginRequest;
-import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
-import com.example.springboard.domain.user.domain.dto.request.UserRequest;
-import com.example.springboard.domain.user.domain.dto.response.TokenResponse;
+import com.example.springboard.domain.user.controller.dto.request.UserLoginRequest;
+import com.example.springboard.domain.user.controller.dto.request.UserPutRequest;
+import com.example.springboard.domain.user.controller.dto.request.UserRequest;
+import com.example.springboard.domain.user.controller.dto.response.TokenResponse;
 import com.example.springboard.domain.user.domain.repository.UserRepository;
 import com.example.springboard.domain.user.exception.AlreadyExistAccountException;
 import com.example.springboard.domain.user.exception.PasswordMissMatchException;
 import com.example.springboard.domain.user.exception.UserNotFoundException;
-import com.example.springboard.global.facade.CurrentFacade;
 import com.example.springboard.global.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

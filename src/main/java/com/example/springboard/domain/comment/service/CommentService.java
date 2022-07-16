@@ -1,7 +1,7 @@
 package com.example.springboard.domain.comment.service;
 
 import com.example.springboard.domain.comment.domain.Comment;
-import com.example.springboard.domain.comment.domain.dto.response.CommentListResponse;
+import com.example.springboard.domain.comment.controller.dto.response.CommentListResponse;
 import com.example.springboard.domain.comment.domain.repository.CommentRepository;
 import com.example.springboard.domain.comment.exception.CommentNotFoundException;
 import com.example.springboard.domain.comment.exception.NoPermissionToDeleteCommentException;

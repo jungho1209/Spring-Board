@@ -1,4 +1,4 @@
-package com.example.springboard.domain.comment.domain.dto.request;
+package com.example.springboard.domain.comment.controller.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.springboard.domain.post.domain.dto.request;
+package com.example.springboard.domain.post.controller.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

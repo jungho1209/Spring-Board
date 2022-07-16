@@ -1,4 +1,4 @@
-package com.example.springboard.domain.user.domain.dto.response;
+package com.example.springboard.domain.user.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
