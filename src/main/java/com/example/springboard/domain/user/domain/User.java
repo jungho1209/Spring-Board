@@ -30,6 +30,7 @@ public class User {
         this.accountId = accountId;
         this.password = password;
         this.name = name;
+
     }
 
     public void userUpdate(String password, String name) {
