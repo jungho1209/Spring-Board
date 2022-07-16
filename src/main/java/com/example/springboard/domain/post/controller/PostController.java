@@ -1,8 +1,8 @@
 package com.example.springboard.domain.post.controller;
 
-import com.example.springboard.domain.post.domain.dto.request.PostRequest;
-import com.example.springboard.domain.post.domain.dto.request.PostUpdateRequest;
-import com.example.springboard.domain.post.domain.dto.response.PostListResponse;
+import com.example.springboard.domain.post.controller.dto.request.PostRequest;
+import com.example.springboard.domain.post.controller.dto.request.PostUpdateRequest;
+import com.example.springboard.domain.post.controller.dto.response.PostListResponse;
 import com.example.springboard.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class PostController {
 
     @PostMapping("/{user-id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void postBoard(@PathVariable ("user-id") Long userId, @Valid @RequestBody PostRequest postRequest) {
+    public void postBoard(@PathVariable("user-id") Long userId, @RequestBody @Valid PostRequest postRequest) {
         postService.postBoard(userId, postRequest);
     }
 
@@ -29,12 +29,12 @@ public class PostController {
     }
 
     @PutMapping("/update/{id}")
-    public void postUpdate(@PathVariable ("id") Long id , @Valid @RequestBody PostUpdateRequest postUpdateRequest) {
+    public void postUpdate(@PathVariable("id") Long id, @RequestBody @Valid PostUpdateRequest postUpdateRequest) {
         postService.postUpdate(id, postUpdateRequest);
     }
 
     @GetMapping("/searchAll/{user-id}")
-    public PostListResponse searchAllPostAtUsers(@PathVariable ("user-id") Long userId) {
+    public PostListResponse searchAllPostAtUsers(@PathVariable("user-id") Long userId) {
         return postService.searchAllPostAtUsers(userId);
     }
 }

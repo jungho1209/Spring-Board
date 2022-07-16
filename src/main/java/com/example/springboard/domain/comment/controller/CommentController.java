@@ -1,8 +1,8 @@
 package com.example.springboard.domain.comment.controller;
 
-import com.example.springboard.domain.comment.domain.dto.request.CreateCommentRequest;
-import com.example.springboard.domain.comment.domain.dto.request.UpdateCommentRequest;
-import com.example.springboard.domain.comment.domain.dto.response.CommentListResponse;
+import com.example.springboard.domain.comment.controller.dto.request.CreateCommentRequest;
+import com.example.springboard.domain.comment.controller.dto.request.UpdateCommentRequest;
+import com.example.springboard.domain.comment.controller.dto.response.CommentListResponse;
 import com.example.springboard.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,9 @@
 package com.example.springboard.domain.user.controller;
 
-import com.example.springboard.domain.user.domain.dto.request.UserLoginRequest;
-import com.example.springboard.domain.user.domain.dto.request.UserPutRequest;
-import com.example.springboard.domain.user.domain.dto.request.UserRequest;
-import com.example.springboard.domain.user.domain.dto.response.TokenResponse;
+import com.example.springboard.domain.user.controller.dto.request.UserLoginRequest;
+import com.example.springboard.domain.user.controller.dto.request.UserPutRequest;
+import com.example.springboard.domain.user.controller.dto.request.UserRequest;
+import com.example.springboard.domain.user.controller.dto.response.TokenResponse;
 import com.example.springboard.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public void userSignUp(@Valid @RequestBody UserRequest userRequest) {
+    public void userSignUp(@RequestBody @Valid UserRequest userRequest) {
         userService.userSignUp(userRequest);
     }
 
@@ -31,12 +31,12 @@ public class UserController {
 
     @PutMapping("/{account-id}")
     public void userUpdate(@PathVariable("account-id") String accountId,
-                           @Valid @RequestBody UserPutRequest userPutRequest) {
+                           @RequestBody @Valid UserPutRequest userPutRequest) {
         userService.userUpdate(accountId, userPutRequest);
     }
 
-    @PostMapping("/signin")
-    public TokenResponse userSignIn(@Valid @RequestBody UserLoginRequest userLoginRequest) {
+    @PostMapping("/login")
+    public TokenResponse userSignIn(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         return userService.userSignIn(userLoginRequest);
     }
 }
