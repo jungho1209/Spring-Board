@@ -38,7 +38,7 @@ public class Comment extends BaseTimeEntity {
 
 
     @Builder
-    public Comment(String comment,LocalDateTime updateAt, Post post, User user) {
+    public Comment(String comment, LocalDateTime updateAt, Post post, User user) {
         this.comment = comment;
         this.updateAt = updateAt;
         this.post = post;

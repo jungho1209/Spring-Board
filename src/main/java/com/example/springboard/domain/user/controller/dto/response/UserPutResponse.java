@@ -9,4 +9,5 @@ public class UserPutResponse {
 
     private final String password;
     private final String name;
+
 }
