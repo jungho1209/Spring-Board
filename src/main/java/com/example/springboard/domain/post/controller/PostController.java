@@ -23,12 +23,12 @@ public class PostController {
         postService.postBoard(userId, postRequest);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void postDelete(@PathVariable("id") Long id) {
         postService.postDelete(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public void postUpdate(@PathVariable("id") Long id, @RequestBody @Valid PostUpdateRequest postUpdateRequest) {
         postService.postUpdate(id, postUpdateRequest);
     }
