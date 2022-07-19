@@ -33,7 +33,7 @@ public class PostController {
         postService.postUpdate(id, postUpdateRequest);
     }
 
-    @GetMapping("/searchAll/{user-id}")
+    @GetMapping("/{user-id}")
     public PostListResponse searchAllPostAtUsers(@PathVariable("user-id") Long userId) {
         return postService.searchAllPostAtUsers(userId);
     }
