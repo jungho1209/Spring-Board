@@ -1,7 +1,7 @@
 package com.example.springboard.domain.comment.service;
 
-import com.example.springboard.domain.comment.domain.Comment;
 import com.example.springboard.domain.comment.controller.dto.response.CommentListResponse;
+import com.example.springboard.domain.comment.domain.Comment;
 import com.example.springboard.domain.comment.domain.repository.CommentRepository;
 import com.example.springboard.domain.comment.exception.CommentNotFoundException;
 import com.example.springboard.domain.comment.exception.NoPermissionToDeleteCommentException;
@@ -28,10 +28,10 @@ public class CommentService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createComment(Long userId, Long postId, String comment) {
+    public void createComment(Long postId, Long userId, String comment) {
 
-        User user = getUser(userId);
         Post post = getPost(postId);
+        User user = getUser(userId);
 
         commentRepository.save(Comment.builder()
                 .comment(comment)
@@ -43,8 +43,8 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId, Long userId) {
 
-        User user = getUser(userId);
         Comment comment = getComment(commentId);
+        User user = getUser(userId);
 
         if (!comment.getUser().equals(user)) {
             throw NoPermissionToDeleteCommentException.EXCEPTION;
@@ -56,8 +56,9 @@ public class CommentService {
     @Transactional
     public void updateComment(Long commentId, Long userId, String comment) {
 
-        User user = getUser(userId);
+
         Comment dbComment = getComment(commentId);
+        User user = getUser(userId);
 
         if (!dbComment.getUser().equals(user)) {
             throw NoPermissionToModifyCommentException.EXCEPTION;
