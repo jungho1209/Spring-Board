@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class UserLoginRequest {
 
     @NotBlank
-    @Size(min = 5, max = 20, message = "id 는 5자~20자이며, 공백, Null 이 불가합니다.")
+    @Size(min = 8, max = 20, message = "account_id 는 8자~20자이며, 공백, Null 이 불가합니다.")
     private String accountId;
 
     @NotBlank

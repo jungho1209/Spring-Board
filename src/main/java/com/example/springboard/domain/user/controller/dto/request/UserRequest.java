@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class UserRequest {
 
     @NotBlank
-    @Size(min = 5 , max = 20 , message = "account_id 는 5자 이상 20자 이하에 공백이 없어야 합니다.")
+    @Size(min = 8 , max = 20 , message = "account_id 는 8자 이상 20자 이하에 공백이 없어야 합니다.")
     private String accountId;
 
     @NotBlank
