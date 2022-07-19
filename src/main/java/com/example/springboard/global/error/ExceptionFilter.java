@@ -3,6 +3,7 @@ package com.example.springboard.global.error;
 import com.example.springboard.global.error.ErrorResponse.CustomErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -39,7 +40,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
         String errorResponseJson = objectMapper.writeValueAsString(customErrorResponse);
 
         response.setStatus(errorCode.getStatus());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().write(errorResponseJson);
     }
 }
