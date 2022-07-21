@@ -9,6 +9,6 @@ public class UserNotFoundException extends CustomException {
             new UserNotFoundException();
 
     private UserNotFoundException() {
-        super(ErrorCode.NOT_EXIST_ACCOUNT);
+        super(ErrorCode.USER_NOT_FOUND);
     }
 }
