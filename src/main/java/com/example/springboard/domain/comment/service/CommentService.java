@@ -72,7 +72,7 @@ public class CommentService {
 
         Post post = getPost(postId);
 
-        List<CommentListResponse.CommentResponse> commentList = commentRepository.findAllByPostId(post.getId())
+        List<CommentListResponse.CommentResponse> commentList = commentRepository.findAllByOrderByIdDesc(post.getId())
                 .stream()
                 .map(comment -> CommentListResponse.CommentResponse.builder()
                         .commentId(comment.getId())
