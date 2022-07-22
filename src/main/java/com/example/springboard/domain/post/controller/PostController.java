@@ -17,24 +17,24 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping("/{user-id}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void postBoard(@PathVariable("user-id") Long userId, @RequestBody @Valid PostRequest postRequest) {
-        postService.postBoard(userId, postRequest);
+    public void postBoard(@RequestBody @Valid PostRequest postRequest) {
+        postService.postBoard(postRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void postDelete(@PathVariable("id") Long id) {
-        postService.postDelete(id);
+    @DeleteMapping("/{post-id}")
+    public void postDelete(@PathVariable("post-id") Long postId) {
+        postService.postDelete(postId);
     }
 
-    @PutMapping("/{id}")
-    public void postUpdate(@PathVariable("id") Long id, @RequestBody @Valid PostUpdateRequest postUpdateRequest) {
-        postService.postUpdate(id, postUpdateRequest);
+    @PutMapping("/{post-id}")
+    public void postUpdate(@PathVariable("post-id") Long postId, @RequestBody @Valid PostUpdateRequest postUpdateRequest) {
+        postService.postUpdate(postId, postUpdateRequest);
     }
 
-    @GetMapping("/{user-id}")
-    public PostListResponse searchAllPostAtUsers(@PathVariable("user-id") Long userId) {
-        return postService.searchAllPostAtUsers(userId);
+    @GetMapping
+    public PostListResponse searchAllPostAtUsers() {
+        return postService.searchAllPostAtUsers();
     }
 }

@@ -7,8 +7,7 @@ import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.post.exception.PostNotFoundException;
 import com.example.springboard.domain.user.domain.User;
-import com.example.springboard.domain.user.domain.repository.UserRepository;
-import com.example.springboard.domain.user.exception.UserNotFoundException;
+import com.example.springboard.global.facade.CurrentFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +20,11 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final CurrentFacade currentFacade;
 
     @Transactional
-    public void postBoard(Long userId, PostRequest postRequest) {
-
-        User user = getUser(userId);
+    public void postBoard(PostRequest postRequest) {
+        User user = currentFacade.getCurrentUser();
 
         Post post = Post.builder()
                 .title(postRequest.getTitle())
@@ -37,18 +35,18 @@ public class PostService {
     }
 
     @Transactional
-    public void postDelete(Long id) {
+    public void postDelete(Long postId) {
 
-        Post post = postRepository.findById(id)
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         postRepository.delete(post);
     }
 
     @Transactional
-    public void postUpdate(Long id, PostUpdateRequest postUpdateRequest) {
+    public void postUpdate(Long postId, PostUpdateRequest postUpdateRequest) {
 
-        Post post = postRepository.findById(id)
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         post.postUpdate(postUpdateRequest.getTitle(),
@@ -56,9 +54,9 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostListResponse searchAllPostAtUsers(Long userId) {
+    public PostListResponse searchAllPostAtUsers() {
 
-        User user = getUser(userId);
+        User user = currentFacade.getCurrentUser();
 
         List<PostListResponse.PostResponse> postList = postRepository.findAllByUserId(user.getId())
                 .stream()
@@ -70,11 +68,5 @@ public class PostService {
 
         return new PostListResponse(postList);
     }
-
-    private User getUser(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-    }
-
 
 }

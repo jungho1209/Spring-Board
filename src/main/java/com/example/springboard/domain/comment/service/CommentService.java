@@ -10,8 +10,7 @@ import com.example.springboard.domain.post.domain.Post;
 import com.example.springboard.domain.post.domain.repository.PostRepository;
 import com.example.springboard.domain.post.exception.PostNotFoundException;
 import com.example.springboard.domain.user.domain.User;
-import com.example.springboard.domain.user.domain.repository.UserRepository;
-import com.example.springboard.domain.user.exception.UserNotFoundException;
+import com.example.springboard.global.facade.CurrentFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +24,13 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final CurrentFacade currentFacade;
 
     @Transactional
-    public void createComment(Long postId, Long userId, String comment) {
+    public void createComment(Long postId, String comment) {
 
+        User user = currentFacade.getCurrentUser();
         Post post = getPost(postId);
-        User user = getUser(userId);
 
         commentRepository.save(Comment.builder()
                 .comment(comment)
@@ -41,10 +40,10 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(Long commentId, Long userId) {
+    public void deleteComment(Long commentId) {
 
         Comment comment = getComment(commentId);
-        User user = getUser(userId);
+        User user = currentFacade.getCurrentUser();
 
         if (!comment.getUser().equals(user)) {
             throw NoPermissionToDeleteCommentException.EXCEPTION;
@@ -54,11 +53,11 @@ public class CommentService {
     }
 
     @Transactional
-    public void updateComment(Long commentId, Long userId, String comment) {
+    public void updateComment(Long commentId, String comment) {
 
 
         Comment dbComment = getComment(commentId);
-        User user = getUser(userId);
+        User user = currentFacade.getCurrentUser();
 
         if (!dbComment.getUser().equals(user)) {
             throw NoPermissionToModifyCommentException.EXCEPTION;
@@ -89,11 +88,6 @@ public class CommentService {
     private Post getPost(Long postId) {
         return postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
-    }
-
-    private User getUser(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
     private Comment getComment(Long commentId) {

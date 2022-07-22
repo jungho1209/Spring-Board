@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
 
-    Optional<Post> findById(Long id);
+    Optional<Post> findById(Long postId);
 
     List<Post> findAllByUserId(Long userId);
 
