@@ -3,6 +3,7 @@ package com.example.springboard.global.error;
 import com.example.springboard.global.error.ErrorResponse.CustomErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -12,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ExceptionFilter extends OncePerRequestFilter {
 
+    
     private final ObjectMapper objectMapper;
 
     @Override

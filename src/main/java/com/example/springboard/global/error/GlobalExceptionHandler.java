@@ -20,8 +20,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(
                 CustomErrorResponse.builder()
                         .status(errorCode.getStatus())
-                        .messages(errorCode.getMessage()).
-                        build(),
+                        .messages(errorCode.getMessage())
+                        .build(),
                 HttpStatus.valueOf(errorCode.getStatus())
         );
     }

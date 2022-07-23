@@ -12,4 +12,5 @@ public class BindErrorResponse {
 
     private final int status;
     private final String messages;
+
 }

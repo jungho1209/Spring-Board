@@ -15,7 +15,7 @@ public enum ErrorCode {
     PASSWORD_MIS_MATCH(401, "Password Mis Match"),
     NO_PERMISSION_TO_DELETE_COMMENT(401, "No Permission To Delete Comment"),
     NO_PERMISSION_TO_MODIFY_COMMENT(401, "No Permission To Modify Comment"),
-    INVALID_REFRESH_TOKEN(401 , "Invalid Refresh Token"),
+    INVALID_REFRESH_TOKEN(401, "Invalid Refresh Token"),
 
     USER_NOT_FOUND(404, "User Not Found"),
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken Not Found"),
@@ -29,8 +29,6 @@ public enum ErrorCode {
     NOT_EXIST_ACCOUNT(409, "Account Not Exist"),
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error");
-
-
 
     private final int status;
     private final String message;
